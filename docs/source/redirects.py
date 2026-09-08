@@ -1,5 +1,10 @@
+# 【中文注释】Sphinx 文档站的重定向表。
+# 键为旧版文档页(不含 .html 后缀),值为重定向目标页。
+# 用途:文档重组/废弃后,旧链接仍能访问到正确的新页面。
+
 redirects = {
     # Redirects for deprecated TorchScript documentation
+    # 【中文注释】已废弃的 TorchScript 文档统一重定向到 torch.compiler API 页
     "jit": "torch.compiler_api.html",
     "jit_language_reference": "torch.compiler_api.html",
     "jit_language_reference_v2": "torch.compiler_api.html",
@@ -7,6 +12,7 @@ redirects = {
     "jit_unsupported": "torch.compiler_api.html",
     "jit_builtin_functions": "torch.compiler_api.html",
     # Redirects for documents moved from source/ to source/user_guide/torch_compiler/
+    # 【中文注释】从 source/ 迁移到 source/user_guide/torch_compiler/ 的文档重定向
     "torch.compiler": "user_guide/torch_compiler/torch.compiler.html",
     "torch.compiler.config": "user_guide/torch_compiler/torch.compiler.config.html",
     "torch.compiler_aot_inductor": "user_guide/torch_compiler/torch.compiler_aot_inductor.html",
@@ -66,6 +72,7 @@ redirects = {
         "user_guide/torch_compiler/torch.compiler_troubleshooting.html"
     ),
     # Redirects for export documents moved from source/ to source/user_guide/torch_compiler/
+    # 【中文注释】torch.export 相关文档迁移后的重定向
     "export": "user_guide/torch_compiler/export.html",
     "export/api_reference": "user_guide/torch_compiler/export/api_reference.html",
     "export/draft_export": "user_guide/torch_compiler/export/draft_export.html",
@@ -80,6 +87,8 @@ redirects = {
     "cond": "higher_order_ops/cond.html",
     # Redirects for compile documents moved from source/compile/ to
     # source/user_guide/torch_compiler/compile/
+    # 【中文注释】torch.compile 编程模型系列文档从 source/compile/
+    # 迁移到 source/user_guide/torch_compiler/compile/ 后的重定向
     "compile/dynamic_shapes_advanced_control_options": (
         "user_guide/torch_compiler/compile/dynamic_shapes_advanced_control_options.html"
     ),
@@ -160,5 +169,6 @@ redirects = {
         "programming_model.where_to_apply_compile.html"
     ),
     # Redirect for removed experimental torch.distributed._dist2 API
+    # 【中文注释】已被移除的实验性 API torch.distributed._dist2 的重定向
     "distributed._dist2": "distributed.html",
 }
