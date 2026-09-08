@@ -1,23 +1,23 @@
-% PyTorch documentation master file, created by
+% PyTorch 文档主文件,创建于
 %  sphinx-quickstart on Fri Dec 23 13:31:47 2016.
-%  You can adapt this file completely to your liking, but it should at least
-%  contain the root `toctree` directive.
+%  你可以按喜好完全修改本文件,但至少应保留根 `toctree` 指令。
+
+> 🌐 本文档由 [pytorch/pytorch](https://github.com/pytorch/pytorch) 翻译,英文原版见原项目。
 
 % :github_url: https://github.com/pytorch/pytorch
 
-PyTorch documentation
+PyTorch 文档
 ===================================
 
-PyTorch is an optimized tensor library for deep learning using GPUs and CPUs.
+PyTorch 是一个针对深度学习优化的张量库,同时支持 GPU 与 CPU。
 
-Features described in this documentation are classified by release status:
+本文档中描述的特性按发布状态分类:
 
-**Stable (API-Stable):**
-These features will be maintained long-term and there should generally be no major performance limitations or gaps in documentation. We also expect to maintain backwards compatibility (although breaking changes can happen and notice will be given one release ahead of time).
+**稳定(Stable,API-Stable):**
+这些特性会被长期维护,通常不应存在重大的性能限制或文档缺口。我们也期望保持向后兼容(尽管破坏性变更仍可能发生,并会提前一个版本发出通知)。
 
-**Unstable (API-Unstable):**
-Encompasses all features that are under active development where APIs may change based on user feedback, requisite performance improvements or because coverage across operators is not yet complete.
-The APIs and performance characteristics of these features may change.
+**不稳定(Unstable,API-Unstable):**
+涵盖所有正在积极开发中的特性,其 API 可能依据用户反馈、必要的性能改进或算子覆盖率尚未完善而变化。这些特性的 API 与性能特征都可能改变。
 
 ```{toctree}
 :glob:
@@ -30,7 +30,7 @@ notes
 community/index
 ```
 
-## Indices and tables
+## 索引与表格
 
 * {ref}`genindex`
 * {ref}`modindex`

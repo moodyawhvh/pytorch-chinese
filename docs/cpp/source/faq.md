@@ -1,21 +1,21 @@
 ---
 myst:
   html_meta:
-    description: Frequently asked questions about the PyTorch C++ API and libtorch.
+    description: PyTorch C++ API 与 libtorch 常见问题解答。
     keywords: PyTorch, C++, FAQ, libtorch, troubleshooting
 ---
 
-# FAQ
+# 常见问题解答
 
-Listed below are a number of common issues users face with the various parts of
-the C++ API.
+> 🌐 本文档由 [pytorch/pytorch](https://github.com/pytorch/pytorch) 翻译,英文原版见原项目。
 
-## C++ Extensions
+下面列出了用户在使用 C++ API 各部分时经常遇到的问题。
 
-### Undefined symbol errors from PyTorch/ATen
+## C++ 扩展
 
-**Problem**: You import your extension and get an `ImportError` stating that
-some C++ symbol from PyTorch or ATen is undefined. For example:
+### PyTorch/ATen 的未定义符号错误
+
+**问题**:导入扩展时收到 `ImportError`,提示 PyTorch 或 ATen 的某个 C++ 符号未定义。例如:
 
 ```cpp
 >>> import extension
@@ -24,28 +24,21 @@ Traceback (most recent call last):
 ImportError: /home/user/.pyenv/versions/3.7.1/lib/python3.7/site-packages/extension.cpython-37m-x86_64-linux-gnu.so: undefined symbol: _ZN2at19UndefinedTensorImpl10_singletonE
 ```
 
-**Fix**: The fix is to `import torch` before you import your extension. This will make
-the symbols from the PyTorch dynamic (shared) library that your extension
-depends on available, allowing them to be resolved once you import your extension.
+**修复**:在导入你的扩展之前先 `import torch`。这样扩展所依赖的 PyTorch 动态(共享)库中的符号就可用了,导入扩展时即可完成符号解析。
 
-### I created a tensor using a function from `at::` and get errors
+### 我用 `at::` 命名空间的函数创建了张量,然后报错
 
-**Problem**: You created a tensor using e.g. `at::ones` or `at::randn` or
-any other tensor factory from the `at::` namespace and are getting errors.
+**问题**:你用 `at::ones`、`at::randn` 或 `at::` 命名空间中的其他张量工厂函数创建了张量,然后报错。
 
-**Fix**: Replace `at::` with `torch::` for factory function calls. You
-should never use factory functions from the `at::` namespace, as they will
-create tensors. The corresponding `torch::` functions will create variables,
-and you should only ever deal with variables in your code.
+**修复**:把工厂函数调用中的 `at::` 替换为 `torch::`。永远不要使用 `at::` 命名空间的工厂函数,它们创建的是张量(tensor);对应的 `torch::` 函数创建的是变量(variable),你的代码里应该始终只使用变量。
 
 ## LibTorch
 
-### How do I move a model to GPU?
+### 如何把模型移到 GPU 上?
 
-**Problem**: You want to run your model on GPU but are unsure how to move both
-the model and tensors to the correct device.
+**问题**:你想在 GPU 上运行模型,但不确定如何把模型和张量都移到正确的设备上。
 
-**Fix**: Use the `to()` method to move your model and tensors to a CUDA device:
+**修复**:使用 `to()` 方法把模型和张量移到 CUDA 设备:
 
 ```cpp
 torch::Device device(torch::kCUDA);
@@ -54,52 +47,48 @@ auto input = torch::randn({1, 3, 224, 224}).to(device);
 auto output = model->forward(input);
 ```
 
-You can also check for CUDA availability before moving:
+移动之前也可以先检查 CUDA 是否可用:
 
 ```cpp
 torch::Device device(torch::cuda::is_available() ? torch::kCUDA : torch::kCPU);
 ```
 
-Make sure to compile with the TorchScript headers by including `<torch/script.h>`.
+确保包含 `<torch/script.h>` 以便编译时带有 TorchScript 头文件。
 
-### My model runs slower in C++ than in Python
+### 我的模型在 C++ 里比在 Python 里慢
 
-**Problem**: Your model inference is slower in C++ compared to Python.
+**问题**:同样的模型推理,C++ 里比 Python 里慢。
 
-**Fix**: There are several common causes:
+**修复**:常见原因有以下几个:
 
-1. **Enable inference mode**: Wrap your inference code with `torch::NoGradGuard`
-   to disable gradient computation:
+1. **启用推理模式**:用 `torch::NoGradGuard` 包裹推理代码,禁用梯度计算:
 
 ```cpp
 torch::NoGradGuard no_grad;
 auto output = model->forward(input);
 ```
 
-2. **Enable optimizations**: For TorchScript models, use `optimize_for_inference`:
+2. **启用优化**:对 TorchScript 模型,使用 `optimize_for_inference`:
 
 ```cpp
 module = torch::jit::optimize_for_inference(module);
 ```
 
-3. **Warm up the model**: Run a few inference passes before benchmarking to allow
-   JIT compilation and memory allocation to complete.
+3. **预热模型**:正式跑分前先执行几次推理,让 JIT 编译与内存分配完成。
 
-4. **Check thread settings**: Ensure proper thread configuration:
+4. **检查线程设置**:确保线程配置合理:
 
 ```cpp
-at::set_num_threads(4);  // Adjust based on your hardware
+at::set_num_threads(4);  // 根据硬件调整
 ```
 
-## Neural Network Modules
+## 神经网络模块
 
-### How do I register submodules in a custom module?
+### 如何在自定义模块中注册子模块?
 
-**Problem**: You created a custom module but the submodules are not being
-recognized during `forward()` or when saving/loading the model.
+**问题**:你写了自定义模块,但子模块在 `forward()` 执行期间或模型保存/加载时没有被识别。
 
-**Fix**: You must register submodules in the constructor using
-`register_module()`:
+**修复**:必须在构造函数中用 `register_module()` 注册子模块:
 
 ```cpp
 struct MyModel : torch::nn::Module {
@@ -117,27 +106,25 @@ struct MyModel : torch::nn::Module {
 };
 ```
 
-### How do I set a module to evaluation mode?
+### 如何把模块切换到评估模式?
 
-**Problem**: Layers like Dropout and BatchNorm behave differently during training
-and evaluation, and you need to switch between modes.
+**问题**:Dropout、BatchNorm 等层在训练与评估时行为不同,你需要在这两种模式之间切换。
 
-**Fix**: Use the `eval()` and `train()` methods:
+**修复**:使用 `eval()` 和 `train()` 方法:
 
 ```cpp
-model->eval();  // Set to evaluation mode
-// ... run inference ...
-model->train(); // Set back to training mode
+model->eval();  // 切换到评估模式
+// ... 执行推理 ...
+model->train(); // 切回训练模式
 ```
 
-## Data Loading
+## 数据加载
 
-### How do I create a custom dataset?
+### 如何创建自定义数据集?
 
-**Problem**: You want to load your own data instead of using built-in datasets.
+**问题**:你想加载自己的数据,而不是使用内置数据集。
 
-**Fix**: Create a class that inherits from `torch::data::datasets::Dataset` and
-implement the `get()` and `size()` methods:
+**修复**:创建一个继承自 `torch::data::datasets::Dataset` 的类,并实现 `get()` 和 `size()` 方法:
 
 ```cpp
 class CustomDataset : public torch::data::datasets::Dataset<CustomDataset> {
@@ -162,7 +149,7 @@ class CustomDataset : public torch::data::datasets::Dataset<CustomDataset> {
 };
 ```
 
-Then use it with a DataLoader:
+然后配合 DataLoader 使用:
 
 ```cpp
 auto dataset = CustomDataset("path/to/data")
@@ -172,13 +159,13 @@ auto dataloader = torch::data::make_data_loader(
   torch::data::DataLoaderOptions().batch_size(32).workers(4));
 ```
 
-## Serialization
+## 序列化
 
-### How do I save and load model weights?
+### 如何保存和加载模型权重?
 
-**Problem**: You want to save trained model weights and load them later.
+**问题**:你想保存训练好的模型权重,以便之后加载。
 
-**Fix**: Use `torch::save()` and `torch::load()`:
+**修复**:使用 `torch::save()` 和 `torch::load()`:
 
 ```cpp
 // Saving
@@ -188,7 +175,7 @@ torch::save(model, "model.pt");
 torch::load(model, "model.pt");
 ```
 
-For saving only specific tensors or state:
+如果只保存特定的张量或状态:
 
 ```cpp
 torch::serialize::OutputArchive archive;
@@ -201,34 +188,29 @@ archive.load_from("model_weights.pt");
 model->load(archive);
 ```
 
-## Build and Compilation
+## 构建与编译
 
-### CMake cannot find Torch
+### CMake 找不到 Torch
 
-**Problem**: When building your project with CMake, you get an error that
-`Torch` package cannot be found.
+**问题**:用 CMake 构建项目时报错,说找不到 `Torch` 包。
 
-**Fix**: You need to specify the path to the LibTorch installation using
-`CMAKE_PREFIX_PATH`:
+**修复**:需要通过 `CMAKE_PREFIX_PATH` 指定 LibTorch 的安装路径:
 
 ```cpp
 cmake -DCMAKE_PREFIX_PATH=/path/to/libtorch ..
 ```
 
-Alternatively, set `Torch_DIR` to point to the directory containing
-`TorchConfig.cmake`:
+或者,把 `Torch_DIR` 指向包含 `TorchConfig.cmake` 的目录:
 
 ```cpp
 cmake -DTorch_DIR=/path/to/libtorch/share/cmake/Torch ..
 ```
 
-### Linker errors with undefined references
+### 链接错误:未定义的引用
 
-**Problem**: Your project compiles but you get linker errors with undefined
-references to PyTorch symbols.
+**问题**:项目可以编译,但链接时报 PyTorch 符号未定义的引用错误。
 
-**Fix**: Ensure you're linking against all required libraries in your
-`CMakeLists.txt`:
+**修复**:确保在 `CMakeLists.txt` 中链接了所有必需的库:
 
 ```cpp
 find_package(Torch REQUIRED)
@@ -236,7 +218,7 @@ add_executable(my_app main.cpp)
 target_link_libraries(my_app "${TORCH_LIBRARIES}")
 ```
 
-Also ensure that the compiler flags are set correctly:
+同时确保编译器标志设置正确:
 
 ```cpp
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
