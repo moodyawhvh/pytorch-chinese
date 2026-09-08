@@ -1,76 +1,51 @@
-# Code of Conduct
+# 行为准则(Code of Conduct)
 
-## Our Pledge
+> 🌐 本文档由 [pytorch/pytorch](https://github.com/pytorch/pytorch) 翻译,英文原版见原项目。
 
-In the interest of fostering an open and welcoming environment, we as
-contributors and maintainers pledge to make participation in our project and
-our community a harassment-free experience for everyone, regardless of age, body
-size, disability, ethnicity, sex characteristics, gender identity and expression,
-level of experience, education, socio-economic status, nationality, personal
-appearance, race, religion, or sexual identity and orientation.
+## 我们的承诺
 
-## Our Standards
+为营造开放、友好的环境,我们作为贡献者和维护者承诺:无论年龄、体型、残障状况、族裔、性征、性别认同与表达、经验水平、教育程度、社会经济地位、国籍、个人外貌、种族、宗教或性取向与性倾向如何,参与本项目和社区对每个人都应是无骚扰的体验。
 
-Examples of behavior that contributes to creating a positive environment
-include:
+## 我们的标准
 
-* Using welcoming and inclusive language
-* Being respectful of differing viewpoints and experiences
-* Gracefully accepting constructive criticism
-* Focusing on what is best for the community
-* Showing empathy towards other community members
+有助于营造积极环境的行为示例包括:
 
-Examples of unacceptable behavior by participants include:
+* 使用友好、包容的语言
+* 尊重不同的观点和经验
+* 从容接受建设性批评
+* 关注最有利于社区的事情
+* 对其他社区成员展现同理心
 
-* The use of sexualized language or imagery and unwelcome sexual attention or
-advances
-* Trolling, insulting/derogatory comments, and personal or political attacks
-* Public or private harassment
-* Publishing others' private information, such as a physical or electronic
-address, without explicit permission
-* Other conduct which could reasonably be considered inappropriate in a
-professional setting
+参与者不可接受的行为示例包括:
 
-## Our Responsibilities
+* 使用性化语言或图像,以及不受欢迎的性关注或性示好
+* 捣乱、侮辱性/贬损性评论,以及人身或政治攻击
+* 公开或私下骚扰
+* 未经明确许可发布他人的隐私信息,例如实际住址或电子地址
+* 其他在职业场合中可被合理认定为不当的行为
 
-Project maintainers are responsible for clarifying the standards of acceptable
-behavior and are expected to take appropriate and fair corrective action in
-response to any instances of unacceptable behavior.
+## 我们的责任
 
-Project maintainers have the right and responsibility to remove, edit, or
-reject comments, commits, code, wiki edits, issues, and other contributions
-that are not aligned to this Code of Conduct, or to ban temporarily or
-permanently any contributor for other behaviors that they deem inappropriate,
-threatening, offensive, or harmful.
+项目维护者有责任澄清可接受行为的标准,并在应对任何不可接受行为时采取恰当、公正的纠正措施。
 
-## Scope
+项目维护者有权利和责任删除、编辑或驳回与本行为准则不一致的评论、提交、代码、wiki 编辑、issue 及其他贡献;对于被认定为不当、威胁性、冒犯性或有害的其他行为,可临时或永久封禁相关贡献者。
 
-This Code of Conduct applies within all project spaces, and it also applies when
-an individual is representing the project or its community in public spaces.
-Examples of representing a project or community include using an official
-project e-mail address, posting via an official social media account, or acting
-as an appointed representative at an online or offline event. Representation of
-a project may be further defined and clarified by project maintainers.
+## 适用范围
 
-## Enforcement
+本行为准则适用于所有项目空间,也适用于个人在公开场合代表本项目或其社区的情形。代表项目或社区的示例包括:使用项目的官方电子邮箱、通过官方社交媒体账号发帖,或作为指定代表出席线上/线下活动。代表项目的情形可由项目维护者进一步定义和澄清。
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the project team at <conduct@pytorch.org>. All
-complaints will be reviewed and investigated and will result in a response that
-is deemed necessary and appropriate to the circumstances. The project team is
-obligated to maintain confidentiality with regard to the reporter of an incident.
-Further details of specific enforcement policies may be posted separately.
+## 执行
 
-Project maintainers who do not follow or enforce the Code of Conduct in good
-faith may face temporary or permanent repercussions as determined by other
-members of the project's leadership.
+如出现辱骂、骚扰或其他不可接受的行为,可通过 <conduct@pytorch.org> 联系项目团队举报。所有投诉都会被审查和调查,并根据具体情况作出必要且恰当的回应。项目团队有义务对事件举报人的身份保密。具体执行政策的更多细节可能另行发布。
 
-## Attribution
+不遵循或不善意执行本行为准则的项目维护者,可能面临由项目领导层其他成员决定的临时或永久性后果。
 
-This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4,
-available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
+## 出处
+
+本行为准则改编自 [Contributor Covenant][homepage] 1.4 版,原文见
+https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
 
 [homepage]: https://www.contributor-covenant.org
 
-For answers to common questions about this code of conduct, see
+关于本行为准则的常见问题解答,见
 https://www.contributor-covenant.org/faq
