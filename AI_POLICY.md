@@ -1,30 +1,13 @@
-We support the use of AI tools to help prepare issues, pull
-requests, reviews, or comments. We expect everyone interacting with
-this repo to follow the below policy whenever they use AI tools.
+# AI 使用政策
 
-*AI-generated content in comments, issues, or PRs must be clearly disclosed and
-contained* (e.g. using a code block or a quote block). AI-generated content must
-be accompanied by human commentary explaining its relevance. For example:
-"Codex produced the following analysis: `<insert codex output here>`, so I
-believe that \<insert human analysis here\>". The only exceptions to this rule
-are the pytorchbot automations.
+> 🌐 本文档由 [pytorch/pytorch](https://github.com/pytorch/pytorch) 翻译,英文原版见原项目。
 
-*Please do not respond to comments+questions by pasting raw or lightly reviewed
-AI-generated text.* Other users' comments+questions are requests for your
-understanding, reasoning, and judgment. Unreviewed AI output shifts the burden of
-verification onto the other party and can make discussions slower, noisier, or
-misleading.
+我们支持使用 AI 工具来协助撰写 issue、pull request、评审或评论。所有与本仓库交互的人,在使用 AI 工具时都应遵守以下政策。
 
-*For pull requests, please carefully read the code before submitting it for
-review*, especially if AI tools helped write or rewrite it. Make sure the
-implementation is something you understand, that the important ideas are clear,
-and that the code is high quality. AI-generated code can sometimes be overly
-complex, indirect, inconsistent, or include artifacts that obscure the main idea.
-Before submitting, simplify where possible and make sure the core change is easy
-for maintainers to review. If your PR is not ready for review, please use the
-GitHub draft PR feature.
+*评论、issue 或 PR 中的 AI 生成内容必须明确披露并妥善 contained*(例如使用代码块或引用块)。AI 生成内容必须附带人类撰写的说明,解释其相关性。例如:"Codex 给出了以下分析:`<在此插入 codex 输出>`,因此我认为 \<在此插入人类分析\>"。本规则的唯一例外是 pytorchbot 自动化。
 
-All contributions should involve a human who understands and can take
-responsibility for the work produced with AI assistance. *We do not accept
-contributions created by fully autonomous agents*, and we may close pull requests
-that appear to have been generated without meaningful human involvement.
+*请不要用粘贴原始或仅略作审阅的 AI 生成文本来回应他人的评论和提问。*其他用户的评论和提问,期待的是你的理解、推理与判断。未经审阅的 AI 输出把核实的负担转嫁给对方,会让讨论更慢、更嘈杂,甚至产生误导。
+
+*对于 pull request,请在提交评审前仔细阅读代码*,尤其是当 AI 工具参与编写或重写时。确保你理解该实现,核心思路清晰,且代码质量过关。AI 生成的代码有时会过度复杂、绕弯、风格不一致,或夹杂掩盖主旨的杂质。提交前请尽量精简,确保维护者能轻松评审核心变更。如果你的 PR 尚未准备好接受评审,请使用 GitHub 的 draft PR 功能。
+
+所有贡献都应有一位理解并愿意为 AI 辅助产出的工作负责的人参与。*我们不接受由完全自主的 agent 创建的贡献*,对于看似在没有实质人类参与的情况下生成的 pull request,我们可能会直接关闭。

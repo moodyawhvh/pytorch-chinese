@@ -1,85 +1,74 @@
-# PyTorch Glossary
+# PyTorch 术语表
+
+> 🌐 本文档由 [pytorch/pytorch](https://github.com/pytorch/pytorch) 翻译,英文原版见原项目。
 
 <!-- toc -->
 
-- [Operation and Kernel](#operation-and-kernel)
+- [算子与 Kernel](#算子与-kernel)
   - [ATen](#aten)
-  - [Operation](#operation)
-  - [Native Operation](#native-operation)
-  - [Custom Operation](#custom-operation)
+  - [算子(Operation)](#算子operation)
+  - [原生算子](#原生算子)
+  - [自定义算子](#自定义算子)
   - [Kernel](#kernel)
-  - [Compound Operation](#compound-operation)
-  - [Composite Operation](#composite-operation)
-  - [Non-Leaf Operation](#non-leaf-operation)
-  - [Leaf Operation](#leaf-operation)
-  - [Device Kernel](#device-kernel)
-  - [Compound Kernel](#compound-kernel)
-- [JIT Compilation](#jit-compilation)
+  - [复合算子](#复合算子)
+  - [组合算子](#组合算子)
+  - [非叶子算子](#非叶子算子)
+  - [叶子算子](#叶子算子)
+  - [设备 Kernel](#设备-kernel)
+  - [复合 Kernel](#复合-kernel)
+- [JIT 编译](#jit-编译)
   - [JIT](#jit)
   - [TorchScript](#torchscript)
-  - [Tracing](#tracing)
-  - [Scripting](#scripting)
+  - [Tracing(追踪)](#tracing追踪)
+  - [Scripting(脚本化)](#scripting脚本化)
 
 <!-- tocstop -->
 
-# Operation and Kernel
+# 算子与 Kernel
 
 ## ATen
-Short for "A Tensor Library". The foundational tensor and mathematical
-operation library on which all else is built.
+"A Tensor Library" 的缩写。基础的张量与数学运算库,其余一切皆构建于其上。
 
-## Operation
-A unit of work. For example, the work of matrix multiplication is an operation
-called aten::matmul.
+## 算子(Operation)
+一个工作单元。例如,矩阵乘法这项工作就是一个名为 aten::matmul 的算子。
 
-## Native Operation
-An operation that comes natively with PyTorch ATen, for example aten::matmul.
+## 原生算子
+PyTorch ATen 自带的算子,例如 aten::matmul。
 
-## Custom Operation
-An Operation that is defined by users and is usually a Compound Operation.
-For example, this
-[tutorial](https://pytorch.org/docs/stable/notes/extending.html) details how
-to create Custom Operations.
+## 自定义算子
+由用户定义的算子,通常是复合算子。例如,这份[教程](https://pytorch.org/docs/stable/notes/extending.html)详细介绍了如何创建自定义算子。
 
 ## Kernel
-Implementation of a PyTorch operation, specifying what should be done when an
-operation executes.
+PyTorch 算子的实现,规定了算子执行时具体要做什么。
 
-## Compound Operation
-A Compound Operation is composed of other operations. Its kernel is usually
-device-agnostic. Normally it doesn't have its own derivative functions defined.
-Instead, AutoGrad automatically computes its derivative based on operations it
-uses.
+## 复合算子
+由其他算子组合而成的算子。它的 kernel 通常与设备无关。它一般不定义自己的导数函数,而是由 AutoGrad 基于其使用的算子自动推导导数。
 
-## Composite Operation
-Same as Compound Operation.
+## 组合算子
+与复合算子相同。
 
-## Non-Leaf Operation
-Same as Compound Operation.
+## 非叶子算子
+与复合算子相同。
 
-## Leaf Operation
-An operation that's considered a basic operation, as opposed to a Compound
-Operation. Leaf Operation always has dispatch functions defined, usually has a
-derivative function defined as well.
+## 叶子算子
+被视为基础运算的算子,与复合算子相对。叶子算子总是定义了 dispatch 函数,通常也定义了导数函数。
 
-## Device Kernel
-Device-specific kernel of a leaf operation.
+## 设备 Kernel
+叶子算子面向特定设备的 kernel。
 
-## Compound Kernel
-Opposed to Device Kernels, Compound kernels are usually device-agnostic and belong to Compound Operations.
+## 复合 Kernel
+与设备 Kernel 相对,复合 kernel 通常与设备无关,属于复合算子。
 
-# JIT Compilation
+# JIT 编译
 
 ## JIT
-Just-In-Time Compilation.
+即时编译(Just-In-Time Compilation)。
 
 ## TorchScript
-An interface to the TorchScript JIT compiler and interpreter.
+TorchScript JIT 编译器与解释器的接口。
 
-## Tracing
-Using `torch.jit.trace` on a function to get an executable that can be optimized
-using just-in-time compilation.
+## Tracing(追踪)
+对函数使用 `torch.jit.trace`,得到一个可用即时编译优化的可执行体。
 
-## Scripting
-Using `torch.jit.script` on a function to inspect source code and compile it as
-TorchScript code.
+## Scripting(脚本化)
+对函数使用 `torch.jit.script`,检查其源代码并将其编译为 TorchScript 代码。
