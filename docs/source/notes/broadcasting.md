@@ -1,22 +1,20 @@
 (broadcasting-semantics)=
 
-# Broadcasting semantics
+# 广播语义(Broadcasting semantics)
 
-Many PyTorch operations support NumPy's broadcasting semantics.
-See [Numpy Documentation](https://numpy.org/doc/stable/user/basics.broadcasting.html) for details.
+> 🌐 本文档由 [pytorch/pytorch](https://github.com/pytorch/pytorch) 翻译,英文原版见原项目。
 
-In short, if a PyTorch operation supports broadcast, then its Tensor arguments can be
-automatically expanded to be of equal sizes (without making copies of the data).
+许多 PyTorch 运算支持 NumPy 的广播语义。细节参见 [NumPy 文档](https://numpy.org/doc/stable/user/basics.broadcasting.html)。
 
-## General semantics
+简而言之,如果一个 PyTorch 运算支持广播,那么它的 Tensor 参数可以被自动扩展为相同尺寸(且不复制数据)。
 
-Two tensors are "broadcastable" if the following rules hold:
+## 一般语义
 
-- When iterating over the dimension sizes, starting at the trailing dimension,
-  the dimension sizes must either be equal, one of them is 1, or one of them
-  does not exist.
+两个张量满足以下规则即为"可广播(broadcastable)":
 
-For Example:
+- 从末尾维度开始逐个对比维度大小,每一处要么相等,要么其中一方为 1,要么其中一方该维度不存在。
+
+例如:
 
 ```python
 >>> x=torch.empty(5,7,3)
@@ -43,15 +41,12 @@ For Example:
 # x and y are not broadcastable, because in the 3rd trailing dimension 2 != 3
 ```
 
-If two tensors `x`, `y` are "broadcastable", the resulting tensor size
-is calculated as follows:
+若两个张量 `x`、`y` "可广播",结果张量的尺寸按以下方式计算:
 
-- If the number of dimensions of `x` and `y` are not equal, prepend 1
-  to the dimensions of the tensor with fewer dimensions to make them equal length.
-- Then, for each dimension size, the resulting dimension size is the max of the sizes of
-  `x` and `y` along that dimension.
+- 如果 `x` 与 `y` 的维数不同,则在维数较少的张量的维度前面补 1,使两者维数一致。
+- 然后,对每个维度,结果维度大小取 `x` 与 `y` 在该维度上的最大值。
 
-For Example:
+例如:
 
 ```python
 # can line up trailing dimensions to make reading easier
@@ -72,12 +67,11 @@ torch.Size([3, 1, 7])
 RuntimeError: The size of tensor a (2) must match the size of tensor b (3) at non-singleton dimension 1
 ```
 
-## In-place semantics
+## 原地(in-place)语义
 
-One complication is that in-place operations do not allow the in-place tensor to change shape
-as a result of the broadcast.
+一个复杂之处在于:原地操作不允许作为操作目标的张量因广播而改变形状。
 
-For Example:
+例如:
 
 ```python
 >>> x=torch.empty(5,3,4,1)
@@ -92,28 +86,19 @@ torch.Size([5, 3, 4, 1])
 RuntimeError: The expanded size of the tensor (1) must match the existing size (7) at non-singleton dimension 2.
 ```
 
-## Backwards compatibility
+## 向后兼容性
 
-Prior versions of PyTorch allowed certain pointwise functions to execute on tensors with different shapes,
-as long as the number of elements in each tensor was equal.  The pointwise operation would then be carried
-out by viewing each tensor as 1-dimensional.  PyTorch now supports broadcasting and the "1-dimensional"
-pointwise behavior is considered deprecated and will generate a Python warning in cases where tensors are
-not broadcastable, but have the same number of elements.
+旧版 PyTorch 允许某些逐点(pointwise)函数在形状不同、但元素数量相等的张量上执行:逐点运算会把每个张量都当作一维张量来处理。PyTorch 现已支持广播,"一维"逐点行为被视为已废弃:当张量不可广播但元素数量相同时,会产生 Python 警告。
 
-Note that the introduction of broadcasting can cause backwards incompatible changes in the case where
-two tensors do not have the same shape, but are broadcastable and have the same number of elements.
-For Example:
+注意,当两个张量形状不同但可广播且元素数量相等时,广播的引入可能造成向后不兼容的变化。例如:
 
 ```python
 >>> torch.add(torch.ones(4,1), torch.randn(4))
 ```
 
-would previously produce a Tensor with size: torch.Size([4,1]), but now produces a Tensor with size: torch.Size([4,4]).
-In order to help identify cases in your code where backwards incompatibilities introduced by broadcasting may exist,
-you may set `torch.utils.backcompat.broadcast_warning.enabled` to `True`, which will generate a python warning
-in such cases.
+过去会产生尺寸为 torch.Size([4,1]) 的张量,现在则产生尺寸为 torch.Size([4,4]) 的张量。为帮助识别代码中可能存在广播引入的向后不兼容的场景,可以把 `torch.utils.backcompat.broadcast_warning.enabled` 设为 `True`,上述情形将产生 Python 警告。
 
-For Example:
+例如:
 
 ```python
 >>> torch.utils.backcompat.broadcast_warning.enabled=True

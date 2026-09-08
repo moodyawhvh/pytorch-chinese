@@ -1,12 +1,11 @@
-# User Guide
+# 用户指南(User Guide)
 
-PyTorch provides a flexible and efficient platform for building deep
-learning models, offering dynamic computation graphs and a rich
-ecosystem of tools and libraries. This guide will help you harness the power
-of PyTorch to create and deploy machine learning models effectively.
+> 🌐 本文档由 [pytorch/pytorch](https://github.com/pytorch/pytorch) 翻译,英文原版见原项目。
+
+PyTorch 为构建深度学习模型提供了一个灵活高效的平台,具备动态计算图和丰富的工具与库生态。本指南将帮助你驾驭 PyTorch 的能力,高效地创建和部署机器学习模型。
 
 ```{note}
-This guide is a work in progress.
+本指南仍在持续编写中。
 ```
 
 ```{toctree}
